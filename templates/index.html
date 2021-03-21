@@ -1,0 +1,44 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+</script>
+
+</head>
+<body>
+    <h1 style="align-items: center;"> Sakar </h1>
+    <h3 style="align-items: center;"> Medical help for layman</h3>
+    <p id='embed'>{{embed}}</p>
+    <p id='mylog'></p>
+    <div id="chartContainer" style="align-items: center; height: 300px; width: 100%;"></div>
+
+    <script>
+        fetch('/test').then(function (response) {
+          return response.json();
+      }).then(function (data) {
+          console.log('GET response:');
+          console.log(data); 
+          var dataPoints = [];
+            var chart = new CanvasJS.Chart("chartContainer",{
+                axisX:{
+                    title:"Date",
+                },
+                axisY:{
+                    title:"Creatinine",
+                },
+                title:{
+                    text:"Creatinine Progress Analysis"
+                },
+                data: [{
+                    type: "area",
+                    dataPoints : data,
+                }]
+            });
+            chart.render();
+        });
+    </script>
+</body>
+</html>
